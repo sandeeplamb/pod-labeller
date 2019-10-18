@@ -1,0 +1,17 @@
+name: pod-labeller
+description: Helm Chart to inject labels for pods
+version: 1.0.0
+apiVersion: v1
+kubeVersion: ">=1.11.8-eks-7c34c0"
+tillerVersion: ">=2.11.1"
+keywords:
+- pod-labeller
+engine: gotpl
+appVersion: 1.0.0
+home: https://github.com/sandeeplamb/pod-labeller
+deprecated: false
+maintainers:
+- email: sandeep.lamba@grandparade.co.uk
+  name: slamba
+sources:
+- https://github.com/sandeeplamb/pod-labeller

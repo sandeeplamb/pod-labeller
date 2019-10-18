@@ -1,0 +1,11 @@
+The pod-labeller has been deployed. 
+{{ if .Values.global.name }}
+You can see the pod is running or not with below command
+command:
+  kubectl get pod pod-labeller -n kube-system
+
+NOTE: Please check the labels for your Pods
+
+kubectl get pods -l client-type=internal
+
+{{- end -}}
