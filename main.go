@@ -37,11 +37,12 @@ func main() {
 	var kubeconfig = flag.String("kubeconfig", "/Users/slamba/.kube/config", "clutser-kubeconfig file")
 
 	flag.Parse()
-	// local = true
+	local = false
 	if local == false {
 		// creates the in-cluster config
 		config, err = rest.InClusterConfig()
 		if err != nil {
+			fmt.Printf("The kubeconfig can not be loaded %v", err)
 			panic(err.Error())
 		}
 	} else {

@@ -1,0 +1,46 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pod-labeller
+rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods", "services"]
+  verbs: ["get", "watch", "list", "patch"]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pod-labeller
+  namespace: scoreboards
+automountServiceAccountToken: true
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  name: pod-labeller-binding
+subjects:
+- kind: ServiceAccount
+  name: pod-labeller
+  namespace: scoreboards
+roleRef:
+  kind: ClusterRole
+  name: pod-labeller
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-labeller
+  namespace: scoreboards
+  labels:
+    app: pod-labeller
+spec:
+  serviceAccountName: pod-labeller
+  containers:
+  - name: pod-labeller
+    imagePullPolicy: Always
+    image: sandeeplamb/pod-labeller:1.0.0
+    command: ["/app/main"]
