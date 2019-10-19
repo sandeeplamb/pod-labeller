@@ -15,11 +15,9 @@ var putLabels = map[string]string{
 }
 ```
 
-Multiple labels are `,` separated.
-
 ## Deploy
 
 
 ```sh
-kubectl apply -f 
+kubectl apply -f kubernetes-resources.yaml
 ```
